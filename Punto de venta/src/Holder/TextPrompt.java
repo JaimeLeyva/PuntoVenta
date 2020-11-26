@@ -8,6 +8,8 @@ import javax.swing.border.*;
 import javax.swing.event.*;
 import javax.swing.text.*;
 
+// El mella2 estubo aqui juas
+
 /**
  * The TextPrompt class will display a prompt over top of a text component when
  * the Document of the text field is empty. The Show property is used to
