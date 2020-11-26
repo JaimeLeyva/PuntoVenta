@@ -17,6 +17,7 @@ import javax.swing.JOptionPane;
  *
  * @author Rey Figuritas
  * @author Jaime Leyva
+ * @author Alejandro Mellado
  */
 public class AgregarProducto extends javax.swing.JFrame {
     
