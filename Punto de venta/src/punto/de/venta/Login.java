@@ -131,10 +131,29 @@ if ("".equals(texto))
        String User = jTextField1.getText();
        String Pass = jPasswordField1.getText();
        
-       if ("".equals(User) && "".equals(Pass)){
+       
+       if(User.equals("") && Pass.equals("")){
            JOptionPane.showMessageDialog(null,"Es necesario ingresar el usuario y Contraseña");
        }else{
-           JOptionPane.showMessageDialog(null,"Ingrese un Usuario y contraseña validos");
+           if(User.equals("admin") && Pass.equals("admin")){
+               this.setVisible(false);
+           FramePrincipalAdmin obj2 = new FramePrincipalAdmin();
+           obj2.setVisible(true);
+           }
+           if (User.equals("user") && Pass.equals("user")) {
+               this.setVisible(false);
+           FramePrincipal obj = new FramePrincipal();
+            obj.setVisible(true);
+           }
+           
+       } 
+       if(!User.equals("") && !Pass.equals("")){
+          JOptionPane.showMessageDialog(null,"Ingrese un usuario y contraseña validos");
+           
+               }
+       
+       /*if ("".equals(User) && "".equals(Pass)){
+           JOptionPane.showMessageDialog(null,"Es necesario ingresar el usuario y Contraseña");
        }
        
        if("User".equals(User) && "User".equals(Pass)){
@@ -147,7 +166,7 @@ if ("".equals(texto))
            this.setVisible(false);
            FramePrincipalAdmin obj2 = new FramePrincipalAdmin();
            obj2.setVisible(true);
-       }
+       }*/
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jPasswordField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordField1ActionPerformed
