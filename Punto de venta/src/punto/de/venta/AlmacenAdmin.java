@@ -177,7 +177,7 @@ public class AlmacenAdmin extends javax.swing.JFrame {
            MostrarTabla1();        
            
         } else{
-           System.out.println("no hay ninguna columna seleccionada");
+           System.out.println("no hay ninguna columna seleccionadaaaaa");
             
         }
     }//GEN-LAST:event_botonEliminarActionPerformed
