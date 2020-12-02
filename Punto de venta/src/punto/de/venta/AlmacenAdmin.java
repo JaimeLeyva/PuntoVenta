@@ -149,22 +149,31 @@ public class AlmacenAdmin extends javax.swing.JFrame {
 
     private void botonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEliminarActionPerformed
         // TODO add your handling code here:
+        //Tomaremos un indice para seleccionar la linea a eliminar con el click
        int indice = tabla.getSelectedRow();
-      
+       
+       //si el indice es diferente a -1 significa que hay una linea seleccionada
         if (indice != -1){
+           
            //System.out.println("Hay una columna seleccionada");
+           
+           /*Con esta variable nos situaremos en el indice, dado que el id es String
+           se declarara como String*/
            String id = (String) tabla.getValueAt(indice, 0);
-           System.out.println(id);
+           
+           //System.out.println(id);
            try {
+               //insertamos el comando de MySql para eliminar el articulo seleccionado
                PreparedStatement ps = cn.prepareStatement("DELETE from articulo WHERE idArticulo=(?);");
-               ps.setString(1,id); 
-               int renglonesAfectados = ps.executeUpdate();
-               System.out.println(renglonesAfectados);
+               ps.setString(1,id);  
+               //ejecutamos el DELETE
+               ps.executeUpdate();
+               
                           
            } catch (SQLException ex) {
                Logger.getLogger(AlmacenAdmin.class.getName()).log(Level.SEVERE, null, ex);
            }
-           
+           //Actualizamos la tabla
            MostrarTabla1();        
            
         } else{
