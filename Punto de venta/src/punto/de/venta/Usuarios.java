@@ -294,7 +294,7 @@ public class Usuarios extends javax.swing.JFrame {
             
             //ejecutamos el Update
             int prueba =ps.executeUpdate();
-            System.out.println(prueba);
+            JOptionPane.showMessageDialog(null, "Usuario modificado correctamente");
                           
            } catch (SQLException ex) {
                Logger.getLogger(AlmacenAdmin.class.getName()).log(Level.SEVERE, null, ex);
@@ -303,7 +303,7 @@ public class Usuarios extends javax.swing.JFrame {
            MostrarTabla1();        
            
         } else{
-           System.out.println("no hay ninguna columna seleccionada");
+           JOptionPane.showMessageDialog(null, "No hay ninguna fila seleccionada");
             
         }      
     }//GEN-LAST:event_botonModificarActionPerformed
@@ -330,6 +330,7 @@ public class Usuarios extends javax.swing.JFrame {
                ps.setString(1,UserName);  
                //ejecutamos el DELETE
                ps.executeUpdate();
+               JOptionPane.showMessageDialog(null, "Usuario eliminado correctamente");
                
                           
            } catch (SQLException ex) {
@@ -339,7 +340,7 @@ public class Usuarios extends javax.swing.JFrame {
            MostrarTabla1();        
            
         } else{
-           System.out.println("no hay ninguna columna seleccionada");
+           JOptionPane.showMessageDialog(null, "No hay ninguna fila seleccionada");
             
         }
     }//GEN-LAST:event_botonBorrarActionPerformed
