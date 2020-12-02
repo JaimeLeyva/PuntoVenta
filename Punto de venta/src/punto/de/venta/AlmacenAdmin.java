@@ -6,6 +6,7 @@
 package punto.de.venta;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -36,7 +37,7 @@ public class AlmacenAdmin extends javax.swing.JFrame {
         modelo.addColumn("Producto");
         modelo.addColumn("Precio");
         modelo.addColumn("Cantidad");
-        jTable1.setModel(modelo);
+        tabla.setModel(modelo);
         
         String sql = "select * from articulo";
         
@@ -53,7 +54,7 @@ public class AlmacenAdmin extends javax.swing.JFrame {
                 modelo.addRow(datos);
                 
             }
-            jTable1.setModel(modelo);
+            tabla.setModel(modelo);
         } catch (SQLException ex) {
             Logger.getLogger(FramePrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -69,15 +70,15 @@ public class AlmacenAdmin extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tabla = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        botonEliminar = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -85,7 +86,7 @@ public class AlmacenAdmin extends javax.swing.JFrame {
 
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tabla);
 
         jButton1.setText("Agregar Producto");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -94,7 +95,12 @@ public class AlmacenAdmin extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("Eliminar Producto");
+        botonEliminar.setText("Eliminar Producto");
+        botonEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonEliminarActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("Cancelar");
         setJMenuBar(jMenuBar1);
@@ -110,7 +116,7 @@ public class AlmacenAdmin extends javax.swing.JFrame {
                         .addGap(27, 27, 27)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(botonEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -123,7 +129,7 @@ public class AlmacenAdmin extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jButton1)
                 .addGap(18, 18, 18)
-                .addComponent(jButton2)
+                .addComponent(botonEliminar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton3)
                 .addContainerGap())
@@ -140,6 +146,32 @@ public class AlmacenAdmin extends javax.swing.JFrame {
         AP.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void botonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEliminarActionPerformed
+        // TODO add your handling code here:
+       int indice = tabla.getSelectedRow();
+      
+        if (indice != -1){
+           //System.out.println("Hay una columna seleccionada");
+           String id = (String) tabla.getValueAt(indice, 0);
+           System.out.println(id);
+           try {
+               PreparedStatement ps = cn.prepareStatement("DELETE from articulo WHERE idArticulo=(?);");
+               ps.setString(1,id); 
+               int renglonesAfectados = ps.executeUpdate();
+               System.out.println(renglonesAfectados);
+                          
+           } catch (SQLException ex) {
+               Logger.getLogger(AlmacenAdmin.class.getName()).log(Level.SEVERE, null, ex);
+           }
+           
+           MostrarTabla1();        
+           
+        } else{
+           System.out.println("no hay ninguna columna seleccionada");
+            
+        }
+    }//GEN-LAST:event_botonEliminarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -178,11 +210,11 @@ public class AlmacenAdmin extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton botonEliminar;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tabla;
     // End of variables declaration//GEN-END:variables
 }
