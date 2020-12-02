@@ -14,7 +14,9 @@ public class DBConexion {
 
     private static String DRIVER = "com.mysql.jdbc.Driver";
     private static String USUARIO = "root";
-    private static String PASSWORD = "Tuerto.21";
+    //private static String PASSWORD = "Tuerto.21";
+    //la de abajo es mi contraseña, solo descomentas tu contraseña para correrlo tu
+    private static String PASSWORD = "password1";
     private static String URL = "jdbc:mysql://localhost:3306/testpuntoventa";
 
     static {
