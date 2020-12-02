@@ -69,8 +69,8 @@ public class FramePrincipalAdmin extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         TablaDatos = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        botonAlmacen = new javax.swing.JButton();
+        botonCorte = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -96,9 +96,19 @@ public class FramePrincipalAdmin extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("Almacen");
+        botonAlmacen.setText("Almacen");
+        botonAlmacen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonAlmacenActionPerformed(evt);
+            }
+        });
 
-        jButton3.setText("Corte");
+        botonCorte.setText("Corte");
+        botonCorte.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonCorteActionPerformed(evt);
+            }
+        });
 
         jMenu1.setText("File");
 
@@ -138,8 +148,8 @@ public class FramePrincipalAdmin extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(53, 53, 53)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(botonAlmacen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(botonCorte, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(0, 62, Short.MAX_VALUE))
         );
@@ -150,9 +160,9 @@ public class FramePrincipalAdmin extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jButton1)
                 .addGap(18, 18, 18)
-                .addComponent(jButton2)
+                .addComponent(botonAlmacen)
                 .addGap(18, 18, 18)
-                .addComponent(jButton3)
+                .addComponent(botonCorte)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -178,6 +188,18 @@ public class FramePrincipalAdmin extends javax.swing.JFrame {
         MakeASale MA = new MakeASale();
         MA.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void botonAlmacenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAlmacenActionPerformed
+         // TODO add your handling code here:
+         AlmacenAdmin AA = new AlmacenAdmin();
+         AA.setVisible(true);
+    }//GEN-LAST:event_botonAlmacenActionPerformed
+
+    private void botonCorteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCorteActionPerformed
+        // TODO add your handling code here:
+        UserCountAdmin UCA = new UserCountAdmin();
+        UCA.setVisible(true);
+    }//GEN-LAST:event_botonCorteActionPerformed
 
     /**
      * @param args the command line arguments
@@ -216,9 +238,9 @@ public class FramePrincipalAdmin extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable TablaDatos;
+    private javax.swing.JButton botonAlmacen;
+    private javax.swing.JButton botonCorte;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
