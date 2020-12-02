@@ -46,7 +46,7 @@ public class Usuarios extends javax.swing.JFrame {
         modelo.addColumn("Rol");
         modelo.addColumn("Hora Llegada");
         modelo.addColumn("Hora Salida");
-        jTable1.setModel(modelo);
+        tablaU.setModel(modelo);
 
         String sql = "select * from users";
 
@@ -63,7 +63,7 @@ public class Usuarios extends javax.swing.JFrame {
                 modelo.addRow(datos);
 
             }
-            jTable1.setModel(modelo);
+            tablaU.setModel(modelo);
         } catch (SQLException ex) {
             Logger.getLogger(FramePrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -80,7 +80,7 @@ public class Usuarios extends javax.swing.JFrame {
 
         jColorChooser1 = new javax.swing.JColorChooser();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tablaU = new javax.swing.JTable();
         jTextField1 = new javax.swing.JTextField();
         jPasswordField1 = new javax.swing.JPasswordField();
         jLabel1 = new javax.swing.JLabel();
@@ -90,7 +90,7 @@ public class Usuarios extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        botonBorrar = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jComboBox1 = new javax.swing.JComboBox<>();
         jComboBox2 = new javax.swing.JComboBox<>();
@@ -98,7 +98,7 @@ public class Usuarios extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tablaU.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -106,7 +106,7 @@ public class Usuarios extends javax.swing.JFrame {
 
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tablaU);
 
         jLabel1.setText("Nombre");
 
@@ -132,10 +132,10 @@ public class Usuarios extends javax.swing.JFrame {
             }
         });
 
-        jButton3.setText("Eliminar");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        botonBorrar.setText("Eliminar");
+        botonBorrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                botonBorrarActionPerformed(evt);
             }
         });
 
@@ -183,7 +183,7 @@ public class Usuarios extends javax.swing.JFrame {
                                 .addGap(43, 43, 43)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(botonBorrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                         .addGap(0, 58, Short.MAX_VALUE))))
         );
@@ -210,7 +210,7 @@ public class Usuarios extends javax.swing.JFrame {
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton3)
+                    .addComponent(botonBorrar)
                     .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel5)
@@ -219,7 +219,7 @@ public class Usuarios extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton4)
                 .addContainerGap())
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 403, Short.MAX_VALUE)
+            .addComponent(jScrollPane1)
         );
 
         pack();
@@ -257,9 +257,41 @@ public class Usuarios extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void botonBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBorrarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+         // TODO add your handling code here:
+        //Tomaremos un indice para seleccionar la linea a eliminar con el click
+       int indice = tablaU.getSelectedRow();
+       
+       //si el indice es diferente a -1 significa que hay una linea seleccionada
+        if (indice != -1){
+           
+           //System.out.println("Hay una columna seleccionada");
+           
+           /*Con esta variable nos situaremos en el indice, dado que el id es String
+           se declarara como String*/
+           String UserName = (String) tablaU.getValueAt(indice, 0);
+           
+           //System.out.println(id);
+           try {
+               //insertamos el comando de MySql para eliminar el articulo seleccionado
+               PreparedStatement ps = cn.prepareStatement("DELETE from users WHERE UserName=(?);");
+               ps.setString(1,UserName);  
+               //ejecutamos el DELETE
+               ps.executeUpdate();
+               
+                          
+           } catch (SQLException ex) {
+               Logger.getLogger(AlmacenAdmin.class.getName()).log(Level.SEVERE, null, ex);
+           }
+           //Actualizamos la tabla
+           MostrarTabla1();        
+           
+        } else{
+           System.out.println("no hay ninguna columna seleccionada");
+            
+        }
+    }//GEN-LAST:event_botonBorrarActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         this.setVisible(false);
@@ -301,9 +333,9 @@ public class Usuarios extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton botonBorrar;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JColorChooser jColorChooser1;
     private javax.swing.JComboBox<String> jComboBox1;
@@ -316,7 +348,7 @@ public class Usuarios extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JTable tablaU;
     // End of variables declaration//GEN-END:variables
 }
